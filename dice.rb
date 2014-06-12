@@ -34,7 +34,7 @@ class Player
     @current_roll.each_with_index { |n, i| puts "(#{ i + 1 }) #{ n }" }
    
     if @turn == 1
-      choices = @current_roll.first
+      choices = [1] 
     else
       puts "Which one(s) would you like to keep? (separate with commas)"
       input = gets.chomp.split(",")
