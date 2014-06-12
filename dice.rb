@@ -34,16 +34,22 @@ class Player
     @current_roll.each_with_index { |n, i| puts "(#{ i + 1 }) #{ n }" }
    
     if @turn == 1
-      choice = @current_roll.first
+      choices = @current_roll.first
     else
-      puts "Which one would you like to keep?"
-      input = gets.chomp
-      choice = @current_roll[input.to_i - 1]
-      @score += choice  if choice != 3
+      puts "Which one(s) would you like to keep? (separate with commas)"
+      input = gets.chomp.split(",")
+      
+      choices = []
+      input.each { |n| @current_roll[n.to_i - 1] == 3 ? choices << 0 : choices << @current_roll[n.to_i - 1] }
+      
+      total = 0
+      choices.each { |n| total += n }
+      
+      @score += total
       @current_roll = []   
     end
 
-    @turn -= 1
+    @turn -= choices.count
   end
 end
 
